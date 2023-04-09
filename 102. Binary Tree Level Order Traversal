@@ -1,0 +1,91 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        /* 
+        // iterative solution
+        List<List<Integer>> output = new LinkedList<>();
+        // iterative solution
+        if(root == null) {
+            return output;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+
+        q.add(root);
+        
+        while(!q.isEmpty()){
+            LinkedList<Integer> cln = new LinkedList<>();//current level nums
+            // look through every node and add to list
+            for(TreeNode node : q) {
+                cln.add(node.val);
+            }
+            //add list to output list
+            output.add(cln);
+            //start prepare for next round, put every child node to new queue
+            Queue<TreeNode> temp = new LinkedList<>();
+            while(!q.isEmpty()){
+                TreeNode cur = q.poll();
+                if(cur.left != null) {
+                    temp.add(cur.left);
+                }
+                if(cur.right != null) {
+                    temp.add(cur.right);
+                }
+            }
+            //record the result
+            q = temp;
+        }
+        return output;  
+        
+        // use less variables
+        List<List<Integer>> output = new LinkedList<>();
+        // iterative solution
+        if(root == null) {
+            return output;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+
+        q.add(root);
+        int count = 1;
+        while(!q.isEmpty()){
+            LinkedList<Integer> temp = new LinkedList<>();//current level nums
+            
+            for(TreeNode node : q){
+                temp.add(node.val);
+            }
+            output.add(temp);
+            int times = count;
+            count = 0;
+            while(times > 0) {
+                TreeNode cur = q.poll();
+                times--;
+                if(cur.left != null) {
+                    q.add(cur.left);
+                    count++;
+                }
+                if(cur.right != null) {
+                    q.add(cur.right);
+                    count++;
+                }
+            }
+        }
+        return output;  
+        */
+        // recursive solution
+        
+        
+    }
+}

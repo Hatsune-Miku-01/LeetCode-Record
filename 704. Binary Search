@@ -1,0 +1,26 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int lo = 0;
+        int hi = nums.length - 1;
+        
+        //loop untile lo pass hi
+        while(lo <= hi) {
+            //find middle index
+            int mid = lo + (hi - lo)/2;
+            //case 1 return mid index
+            if(nums[mid] == target) {
+                return mid;
+            }
+
+            //case 2 return left part
+            else if(target < nums[mid]) {
+                hi = mid - 1;
+            }
+            //case 3 return right part
+            else if(target > nums[mid]) {
+                lo = mid + 1;
+            }
+        }
+        return -1;
+    }
+}

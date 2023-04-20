@@ -1,0 +1,54 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        // recursive solution with complexity of O(n), space O(n)
+        //here use null to indicate infinity
+        /*
+        return validate(root, null, null);
+        */
+        // Iterative with O(n complexity)
+        if(root == null) return true;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while(root != null || !stack.isEmpty()) {
+            //push all the nodes at left until touch the end of tree
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if(pre != null && root.val <= pre.val) {
+                return false;
+            }
+            pre = root;
+            root = root.right;
+        }
+        return true;
+    }
+    /*
+    public boolean validate(TreeNode root, Integer low, Integer high) {
+        if(root == null) return true;
+        // low means no value less than the lower bound
+        // high means no value higher than the high bound
+        if((low != null && root.val <= low) || (high != null && root.val >= high) ){
+            return false;
+        }
+        return validate(root.left, low, root.val) && validate(root.right, root.val, high);
+    }
+    */
+
+}

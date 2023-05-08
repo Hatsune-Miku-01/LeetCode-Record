@@ -1,0 +1,27 @@
+class Solution {
+    public String getHint(String secret, String guess) {
+        // initial a map to store the character and it's count
+        HashMap<Character, Integer> map = new HashMap<>();
+        int bulls = 0, cows = 0;
+
+        // loop through both input to check characters
+        for(int i = 0; i < guess.length(); i++) {
+            char s = secret.charAt(i);
+            char g = guess.charAt(i);
+
+            if(s == g) {
+                bulls++;
+            } else {
+                if(map.getOrDefault(s, 0) < 0) {
+                    cows++;
+                }
+                if(map.getOrDefault(g, 0) > 0) {
+                    cows++;
+                }
+                map.put(s, map.getOrDefault(s, 0) + 1);
+                map.put(g, map.getOrDefault(g, 0) - 1);
+            }
+        }
+        return bulls + "A" + cows + "B";
+    }
+}

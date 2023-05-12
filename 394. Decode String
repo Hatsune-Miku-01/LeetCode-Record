@@ -1,0 +1,53 @@
+class Solution {
+    public String decodeString(String s) {
+       
+       Stack<Character> stack = new Stack();
+
+        for(int i = 0; i < s.length(); i++) {
+            // Stop when first meet ]
+            if(s.charAt(i) == ']') {
+              // build a new list to store characters
+              List<Character> decodedString = new ArrayList<>();
+              // get encoded string
+              while(stack.peek() != '[') {
+                decodedString.add(stack.pop());
+              }
+
+              // pop [ from stack
+              stack.pop();
+              // prepare for the digits, base is for 10 or more digits
+              int base = 1;
+              // record K value
+              int k = 0;
+
+              // get numebr k
+              while(!stack.isEmpty() && Character.isDigit(stack.peek())) {
+                // use  value - '0' to get the int value by unicode
+                k = k + (stack.pop() - '0') * base;
+                base *= 10; // next loop for the 10th digit
+              }
+
+              // decode k[decodedString], by pushing decodedString k times into stack
+              while(k != 0) {
+                // push reversely
+                for(int j = decodedString.size() - 1; j >= 0; j--) {
+                  stack.push(decodedString.get(j));
+                }
+                k--;
+              }
+            }
+            else{
+              // push current character to the stack
+              stack.push(s.charAt(i));
+            }
+        }
+        // get the result from the stack
+        char[] result = new char[stack.size()];
+        for(int i = result.length -1; i >= 0; i--) {
+          result[i] = stack.pop();
+        }
+
+        return new String(result);
+
+    }
+}
